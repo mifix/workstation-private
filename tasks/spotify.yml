@@ -1,0 +1,9 @@
+
+- name: Spotify | add repository key
+  apt_key: keyserver=keyserver.ubuntu.com id=94558F59
+
+- name: Spotify | add repository
+  apt_repository: repo='deb http://repository.spotify.com stable non-free' state=present
+
+- name: Spotify | ensure is installed
+  apt: name=spotify-client cache_valid_time=3600

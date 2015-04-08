@@ -1,0 +1,14 @@
+---
+
+- name: add OS specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+
+- name: ensure software is present (Debian based)
+  apt: name={{item}} state=present update_cache=yes cache_valid_time=3600
+  when: ansible_os_family == "Debian"
+  with_items: workstation_private_packages
+
+- include: spotify.yml
+  tags: ['music', 'spotify']
+
